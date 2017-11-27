@@ -13,10 +13,10 @@ use IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity zadatak3 is
     Port ( iCLK : in  STD_LOGIC;
-           inRST : in  STD_LOGIC;	
-           inSTART : in  STD_LOGIC;
-           inSTOP : in  STD_LOGIC;
-           inCONTINUE : in  STD_LOGIC;
+           iRESET : in  STD_LOGIC;	
+           iSTART : in  STD_LOGIC;
+           iSTOP : in  STD_LOGIC;
+           iCONTINUE : in  STD_LOGIC;
            oSEC : out  STD_LOGIC_VECTOR (7 downto 0));
 end zadatak3;
 
@@ -31,38 +31,38 @@ architecture Behavioral of zadatak3 is
 
 begin
 		
-	process (sRUN, sRUN_old, inSTART, inCONTINUE, inSTOP, inRST) begin
-		if (inRST = '0') then -- ako je reset pritisnut, prestajemo da brojimo
+	process (sRUN, sRUN_old, iSTART, iCONTINUE, iSTOP, iRESET) begin
+		if (iRESET = '0') then -- ako je reset pritisnut, prestajemo da brojimo
 			sRUN <= '0';
-		elsif (inSTART = '0') then -- ako je start pritisnut, pocinjemo da brojimo 
+		elsif (iSTART = '0') then -- ako je start pritisnut, pocinjemo da brojimo 
 			sRUN <= '1';
-		elsif (inSTOP = '0') then -- ako je stop pritisnut, prestajemo da brojimo i ne diramo trenutno stanje sSEC i sCNT da bismo kasnije mogli da nastavimo 
+		elsif (iSTOP = '0') then -- ako je stop pritisnut, prestajemo da brojimo i ne diramo trenutno stanje sSEC i sCNT da bismo kasnije mogli da nastavimo 
 			sRUN <= '0';
-		elsif (inCONTINUE = '0') then -- nastavljamo da brojimo 
+		elsif (iCONTINUE = '0') then -- nastavljamo da brojimo 
 			sRUN <= '1';
 		else
 			sRUN <= sRUN_old; -- u svakom drugom slucaju uzimamo vec postojece (staro) stanje za RUN 
 		end if;
 	end process;
 	
-	process (iCLK, inRST) begin
-		if (inRST = '0') then -- ako je reset pritisnut, vrati sve vrednosti na nulu 
-			sSEC <= (others => '0');
-			sCOUNT <= (others => '0');
+	process (iCLK, iRESET) begin
+		if (iRESET = '0') then -- ako je reset pritisnut, vrati sve vrednosti na nulu 
+			sSEC <= "00000000";
+			sCOUNT <= "0000000000000000000000000";
 		elsif (rising_edge(iCLK)) then
 			if (sRUN = '1') then -- ako je stoperica pokreuta, povecavamo sCNT za 1 i sSEC ako je sCNT jednako broju taktova tokom jedne sekunde
 				if (sCOUNT = cSEC) then
-					sCOUNT <= (others => '0');
+					sCOUNT <= "0000000000000000000000000";
 					sSEC <= sSEC + "00000001";
-				elsif (inSTART = '0') then -- ako smo pritisnuli start, vracamo sve na 0
+				elsif (iSTART = '0') then -- ako smo pritisnuli start, vracamo sve na 0
 					sSEC <= "00000000";
-					sCOUNT <= (others => '0');
+					sCOUNT <= "0000000000000000000000000";
 				else
 					sCOUNT <= sCOUNT + "0000000000000000000000001";
 				end if;
 			end if;
 			
-			sRUN_old <= sRUN;
+			sRUN_old <= sRUN; -- kada smo sve zavrsili, stavljamo run na run_old da ga sacuva
 			
 		end if;
 	end process;
