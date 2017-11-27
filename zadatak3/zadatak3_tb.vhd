@@ -15,10 +15,10 @@ ARCHITECTURE behavior OF zadatak3_tb IS
     COMPONENT zadatak3
     PORT(
          iCLK : IN  std_logic;
-         inRST : IN  std_logic;
-         inSTART : IN  std_logic;
-         inSTOP : IN  std_logic;
-         inCONTINUE : IN  std_logic;
+         iRESET : IN  std_logic;
+         iSTART : IN  std_logic;
+         iSTOP : IN  std_logic;
+         iCONTINUE : IN  std_logic;
          oSEC : OUT  std_logic_vector(7 downto 0)
         );
     END COMPONENT;
@@ -26,10 +26,10 @@ ARCHITECTURE behavior OF zadatak3_tb IS
 
    --Inputs
    signal iCLK : std_logic := '0';
-   signal inRST : std_logic := '0';
-   signal inSTART : std_logic := '0';
-   signal inSTOP : std_logic := '0';
-   signal inCONTINUE : std_logic := '0';
+   signal iRESET : std_logic := '0';
+   signal iSTART : std_logic := '0';
+   signal iSTOP : std_logic := '0';
+   signal iCONTINUE : std_logic := '0';
 
  	--Outputs
    signal oSEC : std_logic_vector(7 downto 0);
@@ -42,10 +42,10 @@ BEGIN
 	-- Instantiate the Unit Under Test (UUT)
    uut: zadatak3 PORT MAP (
           iCLK => iCLK,
-          inRST => inRST,
-          inSTART => inSTART,
-          inSTOP => inSTOP,
-          inCONTINUE => inCONTINUE,
+          iRESET => iRESET,
+          iSTART => iSTART,
+          iSTOP => iSTOP,
+          iCONTINUE => iCONTINUE,
           oSEC => oSEC
         );
 
@@ -62,76 +62,76 @@ BEGIN
    -- Stimulus process
    stim_proc: process
    begin		
-      inRST <= '0';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+      iRESET <= '0';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
       wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 		
-      inRST <= '1';
-		inSTART <= '0';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+      iRESET <= '1';
+		iSTART <= '0';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '0';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '0';
+		iCONTINUE <= '1';
 		wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '0';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '0';
 		wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '0';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '0';
+		iCONTINUE <= '1';
 		wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 		
-		inRST <= '1';
-		inSTART <= '0';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '0';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 50 ns;
 		
-		inRST <= '1';
-		inSTART <= '1';
-      inSTOP <= '1';
-		inCONTINUE <= '1';
+		iRESET <= '1';
+		iSTART <= '1';
+      iSTOP <= '1';
+		iCONTINUE <= '1';
 		wait for 100 ns;
 		wait;
    end process;
